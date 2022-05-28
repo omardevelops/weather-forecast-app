@@ -1,1 +1,2 @@
-console.log('chicken');
+import './reset.css';
+import './style.css';
