@@ -2,7 +2,7 @@
 // https://api.openweathermap.org/data/2.5/weather?q=Dubai&APPID=8230c0b0d2c568cf07b2de9c2d671edc&units=metric
 
 // Based on an input location returns object of weather data
-const getWeatherData = async (location) => {
+const getCurrentWeatherData = async (location) => {
   try {
     const response = await fetch(
       `https://api.openweathermap.org/data/2.5/weather?q=${location}&APPID=8230c0b0d2c568cf07b2de9c2d671edc&units=metric`
@@ -15,4 +15,4 @@ const getWeatherData = async (location) => {
   }
 };
 
-export default getWeatherData;
+export default getCurrentWeatherData;
