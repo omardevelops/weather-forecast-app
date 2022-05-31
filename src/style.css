@@ -75,13 +75,12 @@ input:focus {
   margin-top: 5px;
   display: block;
   height: 25px;
-  width: 100%;
 }
 
 #location-search input.invalid + .error-msg::before {
   color: red;
   content: '*Incorrect input';
-  font-size: 1.2rem;
+  font-size: 1.3rem;
   font-weight: bold;
   font-style: italic;
 }
