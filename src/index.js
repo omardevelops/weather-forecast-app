@@ -15,9 +15,16 @@ const button = document.querySelector('#welcome > #location-search button');
 const formInput = document.querySelector('#welcome #location');
 
 formInput.addEventListener('input', () => {
-  if (formInput.validity.valid) button.disabled = false;
-  else if (formInput.validity.valueMissing === false) {
+  if (formInput.validity.valid) {
     button.disabled = false;
+    formInput.classList.remove('invalid');
+  } else {
+    button.disabled = true;
+    if (formInput.validity.valueMissing === false) {
+      formInput.classList.add('invalid');
+    } else {
+      formInput.classList.remove('invalid');
+    }
   }
 });
 button.addEventListener('click', async () => {

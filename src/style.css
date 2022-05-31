@@ -51,7 +51,7 @@ input:focus {
 #location-search button {
   font: inherit;
   padding: 15px 25px;
-  margin-top: 30px;
+  margin-top: 15px;
   background-color: aquamarine;
   border: 2px solid black;
   color: black;
@@ -65,4 +65,23 @@ input:focus {
 #location-search button:disabled {
   background-color: rgb(136, 134, 134);
   color: rgb(75, 75, 75);
+}
+
+#location-search input.invalid {
+  border-color: red;
+}
+
+#location-search input + .error-msg {
+  margin-top: 5px;
+  display: block;
+  height: 25px;
+  width: 100%;
+}
+
+#location-search input.invalid + .error-msg::before {
+  color: red;
+  content: '*Incorrect input';
+  font-size: 1.2rem;
+  font-weight: bold;
+  font-style: italic;
 }
