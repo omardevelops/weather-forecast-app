@@ -1,13 +1,25 @@
 import './reset.css';
 import './style.css';
-import sampleWeatherData from './sample-current-weather.json';
+// import sampleWeatherData from './sample-current-weather.json';
 import {
   getCurrentWeatherData,
   getRequiredWeatherData,
 } from './weather-script';
+import createSearchboxElement from './location-search';
 
-const button = document.querySelector('#welcome > form button');
+const welcomeContainer = document.querySelector('#welcome');
+const locationSearchContainer = createSearchboxElement();
+welcomeContainer.appendChild(locationSearchContainer);
+
+const button = document.querySelector('#welcome > #location-search button');
 const formInput = document.querySelector('#welcome #location');
+
+formInput.addEventListener('input', () => {
+  if (formInput.validity.valid) button.disabled = false;
+  else if (formInput.validity.valueMissing === false) {
+    button.disabled = false;
+  }
+});
 button.addEventListener('click', async () => {
   // Fetch weather data from OpenWeather
   console.log(formInput);
@@ -17,7 +29,7 @@ button.addEventListener('click', async () => {
   if (weatherData.cod === '400') {
     alert('Empty');
   } else if (weatherData.cod === '404') {
-    alert('City not found');
+    alert('Location not found.');
   } else {
     // Get needed fields only
     const neededWeatherData = getRequiredWeatherData(weatherData);

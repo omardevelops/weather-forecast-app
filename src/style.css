@@ -11,6 +11,9 @@ main {
   align-items: center;
   justify-content: center;
 }
+input:focus {
+  outline: none;
+}
 
 #welcome {
   background-color: whitesmoke;
@@ -24,7 +27,7 @@ main {
   font-weight: bold;
   margin-bottom: 30px;
 }
-#welcome form {
+#welcome #location-search {
   display: flex;
   flex-direction: column;
   /* align-items: center; */
@@ -33,25 +36,33 @@ main {
   gap: 5px;
   width: 90%;
   margin: 0 auto;
+  padding: 0;
 }
-#welcome label {
+#location-search label {
   margin-left: 15px;
 }
-#welcome input {
+#location-search input {
   font-size: 1.5rem;
   font-family: inherit;
   padding: 15px;
   border-radius: 30px;
   border: 2px solid black;
 }
-#welcome button {
+#location-search button {
   font: inherit;
   padding: 15px 25px;
   margin-top: 30px;
   background-color: aquamarine;
+  border: 2px solid black;
+  color: black;
 }
 
-#welcome button:hover,
-#welcome button:focus {
+#location-search button:hover,
+#location-search button:focus {
   background-color: rgb(68, 146, 120);
+}
+
+#location-search button:disabled {
+  background-color: rgb(136, 134, 134);
+  color: rgb(75, 75, 75);
 }
