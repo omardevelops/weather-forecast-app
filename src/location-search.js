@@ -1,12 +1,11 @@
-// This module is responsible for the logic
-// of the location search box that allows
-// the user to submit a request to the API
 import {
   getCurrentWeatherData,
   getRequiredWeatherData,
 } from './weather-script';
 
-// Object storing DOM elements of location
+// This module is responsible for the logic
+// of the location search box that allows
+// the user to submit a request to the API
 const LocationSearch = () => {
   let container;
   let input;
