@@ -1,9 +1,8 @@
 // This component is responsible for showing weather data of a particular city or location
 import getIconBasedOnWeather from './weather-icon-loader';
-
 // Creates and returns a container with weather information
-const createWeatherDetailsBox = () => {
-  const weatherInfo = {
+const createWeatherDetailsBox = (weatherInfo) => {
+  const weatherInfoSample = {
     cityName: 'Dubai',
     countryCode: 'AE',
     countryName: 'United Arab Emirates',

@@ -48,6 +48,10 @@ const LocationSearch = () => {
 
       // Remove welcome screen
       document.querySelector('#welcome').remove();
+      // Add weather info
+      document
+        .querySelector('main')
+        .appendChild(createWeatherDetailsBox(neededWeatherData));
     }
   };
 
