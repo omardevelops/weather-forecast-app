@@ -1,16 +1,5 @@
 // This component is responsible for showing weather data of a particular city or location
-import getIcon from './weather-icon-loader';
-
-// Gets "weather label" (example: Clear) as input
-// Returns appropriate image icon
-const getIconBasedOnWeather = (weather) => {
-  switch (weather) {
-    case 'clear':
-      return 'clear-day.svg';
-    default:
-      return '';
-  }
-};
+import getIconBasedOnWeather from './weather-icon-loader';
 
 // Creates and returns a container with weather information
 const createWeatherDetailsBox = () => {
@@ -47,7 +36,7 @@ const createWeatherDetailsBox = () => {
 
   // Weather Icon
   const weatherIcon = document.createElement('img');
-  weatherIcon.src = getIcon();
+  weatherIcon.src = getIconBasedOnWeather(weatherInfo.currentWeatherLabel);
 
   // Weather Description Label
   const weatherLabel = document.createElement('h1');

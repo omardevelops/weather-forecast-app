@@ -101,9 +101,12 @@ h2 {
   flex-direction: column;
   gap: 15px;
 }
+#weather-details-box > div > h1:first-child {
+  margin-bottom: 30px;
+}
 
 #weather-details-box img {
-  height: 200px;
+  height: 150px;
   padding: 15px;
   background-color: #27292b;
   border-radius: 30%;

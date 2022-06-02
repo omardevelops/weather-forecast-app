@@ -11,6 +11,35 @@ import Haze from './assets/weather-icons/haze.svg';
 import Dust from './assets/weather-icons/dust.svg'; // Use for Sand as well
 import Fog from './assets/weather-icons/fog.svg';
 
-const getIcon = () => Thunderstorm;
+const getIconBasedOnWeather = (weather) => {
+  switch (weather) {
+    case 'Clear':
+      return Clear;
+    case 'Clouds':
+      return Clouds;
+    case 'Thunderstorm':
+      return Thunderstorm;
+    case 'Drizzle':
+      return Drizzle;
+    case 'Rain':
+      return Rain;
+    case 'Snow':
+      return Snow;
+    case 'Mist':
+      return Mist;
+    case 'Smoke':
+      return Smoke;
+    case 'Haze':
+      return Haze;
+    case 'Sand':
+    case 'Dust':
+      return Dust;
+    case 'Fog':
+      return Fog;
 
-export default getIcon;
+    default:
+      return Clouds;
+  }
+};
+
+export default getIconBasedOnWeather;
