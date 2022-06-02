@@ -3,6 +3,8 @@ import {
   getRequiredWeatherData,
 } from './weather-script';
 
+import createWeatherDetailsBox from './weather-city-page';
+
 // This module is responsible for the logic
 // of the location search box that allows
 // the user to submit a request to the API
