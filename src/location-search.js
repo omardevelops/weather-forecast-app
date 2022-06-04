@@ -52,6 +52,12 @@ const LocationSearch = () => {
       document
         .querySelector('main')
         .appendChild(createWeatherDetailsBox(neededWeatherData));
+
+      // Reload button
+      const reloadButton = document.createElement('button');
+      reloadButton.textContent = 'Return to Search';
+      reloadButton.addEventListener('click', () => window.location.reload());
+      document.querySelector('main').appendChild(reloadButton);
     }
   };
 
