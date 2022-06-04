@@ -1,12 +1,13 @@
-// This module is responsible for the logic
-// of the location search box that allows
-// the user to submit a request to the API
 import {
   getCurrentWeatherData,
   getRequiredWeatherData,
 } from './weather-script';
 
-// Object storing DOM elements of location
+import createWeatherDetailsBox from './weather-city-page';
+
+// This module is responsible for the logic
+// of the location search box that allows
+// the user to submit a request to the API
 const LocationSearch = () => {
   let container;
   let input;
@@ -47,6 +48,16 @@ const LocationSearch = () => {
 
       // Remove welcome screen
       document.querySelector('#welcome').remove();
+      // Add weather info
+      document
+        .querySelector('main')
+        .appendChild(createWeatherDetailsBox(neededWeatherData));
+
+      // Reload button
+      const reloadButton = document.createElement('button');
+      reloadButton.textContent = 'Return to Search';
+      reloadButton.addEventListener('click', () => window.location.reload());
+      document.querySelector('main').appendChild(reloadButton);
     }
   };
 

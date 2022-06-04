@@ -31,7 +31,6 @@ const getRequiredWeatherData = (weatherData) => ({
   },
   visibility: weatherData.visibility,
   wind: weatherData.wind,
-  clouds: weatherData.clouds,
 });
 
 export { getCurrentWeatherData, getRequiredWeatherData };
