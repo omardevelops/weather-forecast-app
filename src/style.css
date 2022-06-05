@@ -1,0 +1,49 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto+Flex:opsz,wght@8..144,100;8..144,200;8..144,300;8..144,400;8..144,500;8..144,600;8..144,700;8..144,800;8..144,900;8..144,1000&display=swap');
+body {
+  font-family: 'Roboto Flex', sans-serif;
+  background-color: skyblue;
+  font-size: 1.5rem;
+}
+
+nav {
+  position: fixed;
+  width: 100%;
+  height: 100px;
+  background-color: darkslategray;
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+#searchbox-container {
+  display: flex;
+  flex-direction: row;
+}
+
+#searchbox-container input {
+  flex: 1;
+  padding: 5px 10px;
+  border-radius: 25px;
+  outline: none;
+}
+
+main {
+  display: grid;
+  grid-template-rows: 1fr 1fr 1fr;
+  height: 100%;
+}
+
+main > * {
+  height: 250px;
+}
+
+/* main > div:first-child {
+  background-color: red;
+}
+main > div:nth-child(2) {
+  background-color: blue;
+}
+main > div:nth-child(3) {
+  background-color: yellow;
+} */
