@@ -1,41 +1,100 @@
-@import url('https://fonts.googleapis.com/css2?family=Roboto+Flex:opsz,wght@8..144,100;8..144,200;8..144,300;8..144,400;8..144,500;8..144,600;8..144,700;8..144,800;8..144,900;8..144,1000&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Manrope:wght@200;300;400;500;600;700;800&display=swap');
 body {
-  font-family: 'Roboto Flex', sans-serif;
-  background-color: skyblue;
-  font-size: 1.5rem;
+  font-family: 'Manrope', sans-serif;
+  background-color: rgb(4, 128, 177);
 }
 
 nav {
   position: fixed;
+  padding: 5px 0;
+  top: 0;
+  left: 0;
+  z-index: 1;
   width: 100%;
-  height: 100px;
-  background-color: darkslategray;
+  height: 60px;
+  background-color: rgb(0, 0, 0);
   color: white;
   display: flex;
   align-items: center;
   justify-content: center;
 }
 
-#searchbox-container {
-  display: flex;
-  flex-direction: row;
-}
-
-#searchbox-container input {
-  flex: 1;
-  padding: 5px 10px;
+nav > input {
+  font-size: 1.3rem;
+  width: min(70%, 500px);
+  padding: 5px 20px;
   border-radius: 25px;
   outline: none;
 }
 
 main {
+  position: relative;
   display: grid;
   grid-template-rows: 1fr 1fr 1fr;
-  height: 100%;
+  margin-top: 80px;
 }
 
 main > * {
-  height: 250px;
+  height: 450px;
+}
+
+#current-weather {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 15px;
+  color: white;
+  width: min(80vw, 400px);
+  background-color: rgba(255, 255, 255, 0.25);
+  padding: 15px 25px;
+  border-radius: 15px;
+  margin: 25px auto;
+  text-align: center;
+}
+
+#current-weather > h1 {
+  font-size: 1.5rem;
+}
+#current-weather img {
+  width: 128px;
+}
+#temperature-container {
+  display: flex;
+  align-items: center;
+  gap: 30px;
+}
+#temperature-container h1 {
+  font-size: 4rem;
+  font-weight: 200;
+}
+#current-weather #weather-description {
+  font-size: 2rem;
+}
+
+#current-weather #details {
+  flex: 1;
+  width: 90%;
+  padding: 15px;
+  background-color: rgba(0, 0, 0, 0.15);
+  border-radius: 30px;
+}
+
+#current-weather #details h3 {
+  margin: 0 auto;
+  font-size: 1.5rem;
+  margin-bottom: 20px;
+  padding-bottom: 5px;
+  border-bottom: 2px solid rgba(255, 255, 255, 1);
+  width: 70%;
+}
+
+#current-weather #details span {
+  display: flex;
+  gap: 25px;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto;
 }
 
 /* main > div:first-child {
