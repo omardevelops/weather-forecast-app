@@ -23,6 +23,7 @@ searchbox.addEventListener('keypress', async (key) => {
       );
       console.log(coordinates);
       console.log(currentWeather);
+
       updateCurrentWeatherView(coordinates[0].name, currentWeather);
     } catch (error) {
       console.error(error);
