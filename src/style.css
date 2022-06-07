@@ -2,6 +2,7 @@
 body {
   font-family: 'Manrope', sans-serif;
   background-color: rgb(4, 128, 177);
+  color: white;
 }
 
 nav {
@@ -12,8 +13,7 @@ nav {
   z-index: 1;
   width: 100%;
   height: 60px;
-  background-color: rgb(0, 0, 0);
-  color: white;
+  background-color: black;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -28,14 +28,12 @@ nav > input {
 }
 
 main {
-  position: relative;
-  display: grid;
-  grid-template-rows: 1fr 1fr 1fr;
-  margin-top: 80px;
+  margin-top: 100px;
+  user-select: none;
 }
 
 main > * {
-  height: 450px;
+  /* height: 450px; */
 }
 
 #current-weather {
@@ -43,16 +41,16 @@ main > * {
   flex-direction: column;
   align-items: center;
   gap: 15px;
-  color: white;
+  color: black;
   width: min(80vw, 400px);
-  background-color: rgba(255, 255, 255, 0.25);
-  padding: 15px 25px;
+  background-color: white;
+  padding: 35px 25px;
   border-radius: 15px;
   margin: 25px auto;
   text-align: center;
 }
 
-#current-weather > h1 {
+h1 {
   font-size: 1.5rem;
 }
 #current-weather img {
@@ -61,7 +59,7 @@ main > * {
 #temperature-container {
   display: flex;
   align-items: center;
-  gap: 30px;
+  gap: 35px;
 }
 #temperature-container h1 {
   font-size: 4rem;
@@ -75,8 +73,9 @@ main > * {
   flex: 1;
   width: 90%;
   padding: 15px;
-  background-color: rgba(0, 0, 0, 0.15);
+  /* background-color: ; */
   border-radius: 30px;
+  margin-top: 25px;
 }
 
 #current-weather #details h3 {
@@ -84,7 +83,7 @@ main > * {
   font-size: 1.5rem;
   margin-bottom: 20px;
   padding-bottom: 5px;
-  border-bottom: 2px solid rgba(255, 255, 255, 1);
+  border-bottom: 2px solid #ffffff;
   width: 70%;
 }
 
@@ -95,6 +94,28 @@ main > * {
   align-items: center;
   justify-content: center;
   margin: 0 auto;
+}
+
+#daily-weather {
+  padding: 25px;
+  text-align: center;
+}
+
+#daily-weather > div#daily-container {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  margin-top: 20px;
+  gap: 25px;
+}
+#daily-weather > div#daily-container > div {
+  background-color: gray;
+  border: 2px solid transparent;
+  padding: 50px;
+}
+#daily-weather > div#daily-container > div:hover {
+  border-color: white;
 }
 
 /* main > div:first-child {
