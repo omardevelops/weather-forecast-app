@@ -24,7 +24,11 @@ searchbox.addEventListener('keypress', async (key) => {
       console.log(coordinates);
       console.log(currentWeather);
 
-      updateCurrentWeatherView(coordinates[0].name, currentWeather);
+      updateCurrentWeatherView(
+        coordinates[0].country,
+        coordinates[0].name,
+        currentWeather
+      );
     } catch (error) {
       console.error(error);
       alert(error);
@@ -42,4 +46,4 @@ searchbox.addEventListener('keypress', async (key) => {
 
 // console.log(getFiveDayWeatherData(40.7127281, -74.0060152));
 // console.log(sampleWeather);
-// console.log(aggregateWeatherData(sampleWeather));
+console.log(aggregateWeatherData(sampleWeather));

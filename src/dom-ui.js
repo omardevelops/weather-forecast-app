@@ -2,7 +2,7 @@
 import countries from './countries.json';
 import getIconBasedOnWeather from './weather-icon-loader';
 
-const updateCurrentWeatherView = (cityName, weatherData) => {
+const updateCurrentWeatherView = (countryCode, cityName, weatherData) => {
   const container = document.querySelector('#current-weather');
   const locationName = container.querySelector('h1');
   const weatherIcon = container.querySelector('#temperature-container img');
@@ -10,9 +10,7 @@ const updateCurrentWeatherView = (cityName, weatherData) => {
   const weatherDesc = container.querySelector('#weather-description');
   const weatherDetailsDiv = container.querySelector('#details');
   const weatherDetailsInfo = [];
-  locationName.textContent = `${cityName}, ${
-    countries[weatherData.sys.country]
-  }`;
+  locationName.textContent = `${cityName}, ${countries[countryCode]}`;
   weatherIcon.src = getIconBasedOnWeather(weatherData.weather[0].main);
   tempLabel.textContent = Math.round(weatherData.main.temp);
   weatherDesc.textContent = weatherData.weather[0].main;
@@ -36,5 +34,7 @@ const updateCurrentWeatherView = (cityName, weatherData) => {
   });
   weatherDetailsDiv.appendChild(span);
 };
+
+const updateDailyView = (dailyWeatherData) => {};
 
 export default updateCurrentWeatherView;
