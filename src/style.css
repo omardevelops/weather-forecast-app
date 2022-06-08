@@ -108,7 +108,7 @@ h1 {
 }
 #daily-weather > div#daily-container > div {
   width: 100px;
-  height: 130px;
+  height: 160px;
   display: flex;
   flex-direction: column;
   align-items: center;

@@ -36,7 +36,7 @@ const getCurrentWeather = async (lat, lon) => {
 const getFiveDayWeatherData = async (lat, lon) => {
   try {
     const response = await fetch(
-      `https://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&appid=8230c0b0d2c568cf07b2de9c2d671edc`
+      `https://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&units=metric&appid=8230c0b0d2c568cf07b2de9c2d671edc`
     );
     const data = await response.json();
     return data;
@@ -56,7 +56,23 @@ const aggregateWeatherData = (fullWeatherData) => {
     if (aggregateDaily[date] === undefined) aggregateDaily[date] = {}; // if not avail, new entry
     aggregateDaily[date][time] = item; // adds entire object
   });
-  return { city, weatherInfo: aggregateDaily }; // returns aggregated data with city info as well
+
+  // Find max temp and min temp for each day
+  const dates = Object.keys(aggregateDaily);
+  dates.forEach((date) => {
+    let max = -999;
+    let min = 999;
+    const times = Object.keys(aggregateDaily[date]);
+    times.forEach((time) => {
+      const tempMin = aggregateDaily[date][time].main.temp_min;
+      const tempMax = aggregateDaily[date][time].main.temp_max;
+      if (tempMin < min) min = tempMin;
+      if (tempMax > max) max = tempMax;
+    });
+    aggregateDaily[date].tempMax = max;
+    aggregateDaily[date].tempMin = min;
+  });
+  return aggregateDaily; // returns aggregated data with city info as well
 };
 
 export {
