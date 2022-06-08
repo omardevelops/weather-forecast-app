@@ -1,7 +1,7 @@
 // This module is responsible for manipulating the DOM to produce the UI/UX of the weather app
 import countries from './countries.json';
 import getIconBasedOnWeather from './weather-icon-loader';
-import { getWeekday, getMonthAsString } from './datetime_converter';
+import { getWeekday } from './datetime_converter';
 
 const updateCurrentWeatherView = (countryCode, cityName, weatherData) => {
   const container = document.querySelector('#current-weather');
@@ -43,10 +43,8 @@ const updateHourlyView = (dayWeather) => {
   containerChilds.forEach((child) => child.remove());
 
   const timings = Object.keys(dayWeather.timings);
-  console.log(timings);
   timings.forEach((timing) => {
     const data = dayWeather.timings[timing];
-    console.log(data);
     const div = document.createElement('div');
     const timingLabel = document.createElement('h1');
     timingLabel.textContent = timing.slice(0, 5);
@@ -84,7 +82,6 @@ const updateDailyView = (dailyWeather) => {
     const times = Object.keys(dailyWeather[day].timings);
     const date = new Date(day);
     const weekday = getWeekday(date.getDay());
-    const month = getMonthAsString(date.getMonth());
     const finalDate = `${weekday.slice(0, 3)} ${date.getDate()}`;
 
     const div = document.createElement('div');

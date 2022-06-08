@@ -32,9 +32,6 @@ main {
   user-select: none;
 }
 
-main > * {
-}
-
 #current-weather {
   display: flex;
   flex-direction: column;
