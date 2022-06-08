@@ -1,7 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Manrope:wght@200;300;400;500;600;700;800&display=swap');
 body {
   font-family: 'Manrope', sans-serif;
-  background-color: rgb(4, 128, 177);
+  background-color: rgb(36, 72, 87);
   color: white;
 }
 
@@ -33,20 +33,18 @@ main {
 }
 
 main > * {
-  /* height: 450px; */
 }
 
 #current-weather {
   display: flex;
   flex-direction: column;
   align-items: center;
+  background-color: rgba(0, 0, 0, 0.5);
   gap: 15px;
-  color: black;
-  width: min(80vw, 400px);
-  background-color: white;
+  width: min(80vw, 600px);
+  border-radius: 30px;
   padding: 35px 25px;
-  border-radius: 15px;
-  margin: 25px auto;
+  margin: 0 auto;
   text-align: center;
 }
 
@@ -73,9 +71,7 @@ h1 {
   flex: 1;
   width: 90%;
   padding: 15px;
-  /* background-color: ; */
   border-radius: 30px;
-  margin-top: 25px;
 }
 
 #current-weather #details h3 {
@@ -96,34 +92,40 @@ h1 {
   margin: 0 auto;
 }
 
-#daily-weather {
+#daily-weather,
+#hourly-weather {
   padding: 25px;
   text-align: center;
 }
 
 #daily-weather > div#daily-container {
   display: flex;
-  flex-wrap: wrap;
   align-items: center;
   justify-content: center;
+  flex-wrap: wrap;
   margin-top: 20px;
   gap: 25px;
 }
 #daily-weather > div#daily-container > div {
-  background-color: gray;
+  width: 100px;
+  height: 130px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 5px;
+  background-color: rgba(0, 0, 0, 0.5);
   border: 2px solid transparent;
-  padding: 50px;
+  padding: 15px 10px;
+}
+#daily-weather > div#daily-container > div > img {
+  width: 64px;
+}
+#daily-weather > div#daily-container > div > h2 {
+  font-size: 1.2rem;
 }
 #daily-weather > div#daily-container > div:hover {
-  border-color: white;
+  border-color: whitesmoke;
 }
-
-/* main > div:first-child {
-  background-color: red;
+#daily-weather > div#daily-container > div.selected {
+  border-color: whitesmoke;
 }
-main > div:nth-child(2) {
-  background-color: blue;
-}
-main > div:nth-child(3) {
-  background-color: yellow;
-} */

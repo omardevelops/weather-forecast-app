@@ -17,6 +17,20 @@ const searchLocation = async (cityName) => {
   }
 };
 
+// Based on input latitude and longitude, return current weather for that location
+const getCurrentWeather = async (lat, lon) => {
+  try {
+    const response = await fetch(
+      `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&units=metric&appid=8230c0b0d2c568cf07b2de9c2d671edc`
+    );
+    const data = await response.json();
+    return data;
+  } catch (error) {
+    console.error(error);
+    return error;
+  }
+};
+
 // Based on input latitude and longitude, return comprehensive weather data
 // Returns an object with a list of 3 hour interval segments of weather data over 5 days
 const getFiveDayWeatherData = async (lat, lon) => {
@@ -45,22 +59,9 @@ const aggregateWeatherData = (fullWeatherData) => {
   return { city, weatherInfo: aggregateDaily }; // returns aggregated data with city info as well
 };
 
-// // Filters weather data to needed fields only, returns object of data
-// const getRequiredWeatherData = (weatherData) => ({
-//   cityName: weatherData.name,
-//   countryCode: weatherData.sys.country,
-//   countryName: countries[weatherData.sys.country],
-//   currentWeatherLabel: weatherData.weather[0].main,
-//   currentTemps: {
-//     min: weatherData.main.temp_min,
-//     max: weatherData.main.temp_max,
-//     temp: weatherData.main.temp,
-//     feelsLike: weatherData.main.feels_like,
-//     humidity: weatherData.main.humidity,
-//   },
-//   visibility: weatherData.visibility,
-//   wind: weatherData.wind,
-// });
-
-// export { getCurrentWeatherData, getRequiredWeatherData };
-export { searchLocation, getFiveDayWeatherData, aggregateWeatherData };
+export {
+  searchLocation,
+  getCurrentWeather,
+  getFiveDayWeatherData,
+  aggregateWeatherData,
+};
