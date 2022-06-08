@@ -115,7 +115,8 @@ div.daily-hourly > div {
   gap: 5px;
   background-color: rgba(0, 0, 0, 0.5);
   border: 2px solid transparent;
-  padding: 15px 10px;
+  border-radius: 15px;
+  padding: 25px 15px;
 }
 div.daily-hourly > div > img {
   width: 64px;
