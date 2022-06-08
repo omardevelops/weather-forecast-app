@@ -10,25 +10,24 @@ import {
 } from './api-functions';
 
 import sampleWeather from './sample-data.json';
-import updateCurrentWeatherView from './dom-ui';
+import { updateDailyView, updateCurrentWeatherView } from './dom-ui';
 
 const searchbox = document.querySelector('input');
 searchbox.addEventListener('keypress', async (key) => {
   if (key.code === 'Enter') {
     try {
       const coordinates = await searchLocation(searchbox.value);
-      const currentWeather = await getCurrentWeather(
-        coordinates[0].lat,
-        coordinates[0].lon
-      );
+      // eslint-disable-next-line object-curly-newline
+      const { lat, lon, country, name } = coordinates[0];
+      const currentWeather = await getCurrentWeather(lat, lon);
+      const fiveDayWeather = await getFiveDayWeatherData(lat, lon);
+      const aggregatedFiveDay = aggregateWeatherData(fiveDayWeather);
       console.log(coordinates);
       console.log(currentWeather);
+      console.log(aggregatedFiveDay);
 
-      updateCurrentWeatherView(
-        coordinates[0].country,
-        coordinates[0].name,
-        currentWeather
-      );
+      updateCurrentWeatherView(country, name, currentWeather);
+      updateDailyView(aggregatedFiveDay);
     } catch (error) {
       console.error(error);
       alert(error);
