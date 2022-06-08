@@ -37,7 +37,6 @@ const updateCurrentWeatherView = (countryCode, cityName, weatherData) => {
 };
 
 const updateDailyView = (dailyWeather) => {
-  const dailyLabel = document.querySelector('#daily-weather h1');
   const container = document.querySelector('#daily-container');
   const containerChilds = Array.from(container.childNodes);
   // Remove container's children to reset daily view
@@ -45,13 +44,11 @@ const updateDailyView = (dailyWeather) => {
   // Add divs for each day
   const days = Object.keys(dailyWeather);
   days.forEach((day, index) => {
-    const times = Object.keys(dailyWeather[day]);
-    console.log(times);
+    const times = Object.keys(dailyWeather[day].timings);
     const date = new Date(day);
     const weekday = getWeekday(date.getDay());
     const month = getMonthAsString(date.getMonth());
     const finalDate = `${weekday.slice(0, 3)} ${date.getDate()}`;
-    console.log(finalDate);
     const div = document.createElement('div');
     if (index === 0) div.classList.add('selected'); // Today is selected initially
 
@@ -60,7 +57,7 @@ const updateDailyView = (dailyWeather) => {
 
     const weatherIcon = document.createElement('img');
     weatherIcon.src = getIconBasedOnWeather(
-      dailyWeather[day][times[0]].weather[0].main
+      dailyWeather[day].timings[times[0]].weather[0].main
     );
 
     const weatherTemps = document.createElement('h1');
@@ -71,7 +68,7 @@ const updateDailyView = (dailyWeather) => {
     const weatherDesc = document.createElement('h2');
     // eslint-disable-next-line operator-linebreak
     weatherDesc.textContent =
-      dailyWeather[day][times[0]].weather[0].description;
+      dailyWeather[day].timings[times[0]].weather[0].description;
     div.appendChild(dayDate);
     div.appendChild(weatherIcon);
     div.appendChild(weatherTemps);
@@ -80,4 +77,33 @@ const updateDailyView = (dailyWeather) => {
   });
 };
 
-export { updateCurrentWeatherView, updateDailyView };
+const updateHourlyView = (dayWeather) => {
+  const container = document.querySelector('#hourly-container');
+  const containerChilds = Array.from(container.childNodes);
+  // Remove existing content
+  containerChilds.forEach((child) => child.remove());
+
+  const timings = Object.keys(dayWeather.timings);
+  console.log(timings);
+  timings.forEach((timing) => {
+    const data = dayWeather.timings[timing];
+    console.log(data);
+    const div = document.createElement('div');
+    const timingLabel = document.createElement('h1');
+    timingLabel.textContent = timing.slice(0, 5);
+    const weatherIcon = document.createElement('img');
+    weatherIcon.src = getIconBasedOnWeather(data.weather[0].main);
+    const tempLabel = document.createElement('h1');
+    tempLabel.textContent = Math.round(data.main.temp);
+    const weatherDesc = document.createElement('h2');
+    weatherDesc.textContent = data.weather[0].description;
+
+    div.appendChild(timingLabel);
+    div.appendChild(weatherIcon);
+    div.appendChild(tempLabel);
+    div.appendChild(weatherDesc);
+    container.appendChild(div);
+  });
+};
+
+export { updateCurrentWeatherView, updateDailyView, updateHourlyView };
