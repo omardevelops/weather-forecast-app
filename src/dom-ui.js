@@ -2,6 +2,17 @@
 import countries from './countries.json';
 import getIconBasedOnWeather from './weather-icon-loader';
 import { getWeekday } from './datetime_converter';
+import loadingSvg from './assets/loading.svg';
+
+// Shows a spinning loading component
+const loadingView = () => {
+  const div = document.createElement('div');
+  div.classList.add('loading');
+  const loadingImg = document.createElement('img');
+  loadingImg.src = loadingSvg;
+  div.appendChild(loadingImg);
+  return div;
+};
 
 const updateCurrentWeatherView = (countryCode, cityName, weatherData) => {
   const container = document.querySelector('#current-weather');
@@ -116,4 +127,9 @@ const updateDailyView = (dailyWeather) => {
   });
 };
 
-export { updateCurrentWeatherView, updateDailyView, updateHourlyView };
+export {
+  updateCurrentWeatherView,
+  updateDailyView,
+  updateHourlyView,
+  loadingView,
+};

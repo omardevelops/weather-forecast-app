@@ -127,3 +127,42 @@ div.daily-hourly > div > h2 {
 #daily-weather > div#daily-container > div.selected {
   border-color: whitesmoke;
 }
+
+/* Loading Image */
+
+.loading {
+  margin: 150px auto;
+  display: flex;
+  justify-content: center;
+}
+.loading > img {
+  width: 250px;
+}
+
+/* Animations */
+main {
+  animation: popIn 0.5s ease-out;
+}
+
+.loading {
+  animation: fadeIn 0.5s;
+}
+
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+@keyframes popIn {
+  0% {
+    margin-top: 20px;
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}

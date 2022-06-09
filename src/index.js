@@ -14,15 +14,31 @@ import {
   updateDailyView,
   updateCurrentWeatherView,
   updateHourlyView,
+  loadingView,
 } from './dom-ui';
+
+function later(delay) {
+  return new Promise((resolve) => {
+    setTimeout(resolve, delay);
+  });
+}
 
 const searchbox = document.querySelector('input');
 searchbox.addEventListener('keypress', async (key) => {
   if (key.code === 'Enter') {
     try {
+      // Hide main container
+      const mainContainer = document.querySelector('main');
+      const loadingComponent = loadingView();
+      mainContainer.style.display = 'none';
+      // Show loading component
+      document.body.appendChild(loadingComponent);
       const coordinates = await searchLocation(searchbox.value);
+
+      // Begin API Request
       // eslint-disable-next-line object-curly-newline
       const { lat, lon, country, name } = coordinates[0];
+
       const currentWeather = await getCurrentWeather(lat, lon);
       const fiveDayWeather = await getFiveDayWeatherData(lat, lon);
       const aggregatedFiveDay = aggregateWeatherData(fiveDayWeather);
@@ -32,6 +48,10 @@ searchbox.addEventListener('keypress', async (key) => {
       updateDailyView(aggregatedFiveDay);
       // Update hourly view by fetching first day data
       updateHourlyView(aggregatedFiveDay[daysKeys[0]]);
+
+      // Show main container
+      mainContainer.style.display = 'block';
+      loadingComponent.remove();
     } catch (error) {
       console.error(error);
       alert(error);
