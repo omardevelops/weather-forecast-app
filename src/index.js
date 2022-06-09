@@ -20,11 +20,11 @@ import {
 const searchbox = document.querySelector('input');
 searchbox.addEventListener('keypress', async (key) => {
   if (key.code === 'Enter') {
+    const loadingComponent = loadingView();
+    // Hide main container
+    const mainContainer = document.querySelector('main');
+    mainContainer.style.display = 'none';
     try {
-      // Hide main container
-      const mainContainer = document.querySelector('main');
-      const loadingComponent = loadingView();
-      mainContainer.style.display = 'none';
       // Show loading component
       document.body.appendChild(loadingComponent);
       const coordinates = await searchLocation(searchbox.value);
@@ -42,14 +42,13 @@ searchbox.addEventListener('keypress', async (key) => {
       updateDailyView(aggregatedFiveDay);
       // Update hourly view by fetching first day data
       updateHourlyView(aggregatedFiveDay[daysKeys[0]]);
-
-      // Show main container
-      mainContainer.style.display = 'block';
-      loadingComponent.remove();
     } catch (error) {
       console.error(error);
       alert(error);
     }
+    // Show main container
+    mainContainer.style.display = 'block';
+    loadingComponent.remove();
   }
 });
 // Code segment for searching geolocation
