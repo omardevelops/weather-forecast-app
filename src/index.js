@@ -15,42 +15,13 @@ import {
   updateCurrentWeatherView,
   updateHourlyView,
   loadingView,
+  initializeEventListeners,
 } from './dom-ui';
 
-const searchbox = document.querySelector('input');
-searchbox.addEventListener('keypress', async (key) => {
-  if (key.code === 'Enter') {
-    const loadingComponent = loadingView();
-    // Hide main container
-    const mainContainer = document.querySelector('main');
-    mainContainer.style.display = 'none';
-    try {
-      // Show loading component
-      document.body.appendChild(loadingComponent);
-      const coordinates = await searchLocation(searchbox.value);
+import sampleCurrentWeather from './sample-current-weather.json';
 
-      // Begin API Request
-      // eslint-disable-next-line object-curly-newline
-      const { lat, lon, country, name } = coordinates[0];
+initializeEventListeners();
 
-      const currentWeather = await getCurrentWeather(lat, lon);
-      const fiveDayWeather = await getFiveDayWeatherData(lat, lon);
-      const aggregatedFiveDay = aggregateWeatherData(fiveDayWeather);
-
-      const daysKeys = Object.keys(aggregatedFiveDay);
-      updateCurrentWeatherView(country, name, currentWeather);
-      updateDailyView(aggregatedFiveDay);
-      // Update hourly view by fetching first day data
-      updateHourlyView(aggregatedFiveDay[daysKeys[0]]);
-    } catch (error) {
-      console.error(error);
-      alert(error);
-    }
-    // Show main container
-    mainContainer.style.display = 'block';
-    loadingComponent.remove();
-  }
-});
 // Code segment for searching geolocation
 // let timer = null;
 // searchbox.addEventListener('keyup', (key) => {

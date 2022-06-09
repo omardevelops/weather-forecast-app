@@ -12,12 +12,16 @@ nav {
   left: 0;
   z-index: 1;
   width: 100%;
-  height: 60px;
+  height: 100px;
   background-color: black;
   display: flex;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
+  gap: 15px;
 }
+
+/* Search bar */
 
 nav > input {
   font-size: 1.3rem;
@@ -27,8 +31,41 @@ nav > input {
   outline: none;
 }
 
+/* Temperature Unit Controls */
+nav > div {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 15px;
+  width: 100%;
+}
+
+nav > div > button {
+  font: inherit;
+  font-size: 1rem;
+  padding: 10px 25px;
+  border: none;
+  border-radius: 15px;
+  /* width: 200px; */
+}
+
+nav > div > button:hover {
+  background-color: rgb(151, 188, 209);
+}
+
+nav > div > button.selected {
+  background-color: rgb(33, 71, 91);
+  color: white;
+}
+
+nav > div > button.selected::before {
+  content: '✔';
+  margin-right: 5px;
+}
+
+/* Main content of page (current weather, daily, and hourly) */
 main {
-  margin-top: 100px;
+  margin-top: 120px;
   user-select: none;
 }
 
@@ -104,7 +141,7 @@ div.daily-hourly {
   gap: 25px;
 }
 div.daily-hourly > div {
-  width: 100px;
+  width: 110px;
   height: 160px;
   display: flex;
   flex-direction: column;
@@ -113,7 +150,7 @@ div.daily-hourly > div {
   background-color: rgba(0, 0, 0, 0.5);
   border: 2px solid transparent;
   border-radius: 15px;
-  padding: 25px 15px;
+  padding: 15px;
 }
 div.daily-hourly > div > img {
   width: 64px;
@@ -132,7 +169,7 @@ div.daily-hourly > div > h2 {
 
 .loading {
   width: fit-content;
-  margin: 100px auto;
+  margin: 120px auto;
   display: flex;
   justify-content: center;
   align-items: center;

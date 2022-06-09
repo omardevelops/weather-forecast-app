@@ -4,6 +4,28 @@ import getIconBasedOnWeather from './weather-icon-loader';
 import { getWeekday } from './datetime_converter';
 import loadingSvg from './assets/loading.svg';
 
+import WeatherData from './weather-data-save';
+
+import {
+  getCelsiusFromKelvin,
+  getFahrenheitFromKelvin,
+} from './units-converter';
+
+import {
+  searchLocation,
+  getFiveDayWeatherData,
+  aggregateWeatherData,
+  getCurrentWeather,
+} from './api-functions';
+
+const getTempInSelectedUnit = (temp) => {
+  const celsiusBtn = document.querySelector('#celsius');
+  if (celsiusBtn.classList.contains('selected')) {
+    return `${getCelsiusFromKelvin(temp)}°`;
+  }
+  return `${getFahrenheitFromKelvin(temp)}°`;
+};
+
 // Shows a spinning loading component
 const loadingView = () => {
   const div = document.createElement('div');
@@ -24,9 +46,11 @@ const updateCurrentWeatherView = (countryCode, cityName, weatherData) => {
   const weatherDetailsInfo = [];
   locationName.textContent = `${cityName}, ${countries[countryCode]}`;
   weatherIcon.src = getIconBasedOnWeather(weatherData.weather[0].main);
-  tempLabel.textContent = Math.round(weatherData.main.temp);
+  tempLabel.textContent = getTempInSelectedUnit(weatherData.main.temp);
   weatherDesc.textContent = weatherData.weather[0].main;
-  weatherDetailsInfo.push(`Feels Like ${weatherData.main.feels_like}`);
+  weatherDetailsInfo.push(
+    `Feels Like ${getTempInSelectedUnit(weatherData.main.feels_like)}`
+  );
   weatherDetailsInfo.push(
     `Wind ${weatherData.wind.speed} km/h, ${weatherData.wind.deg}°`
   );
@@ -65,7 +89,7 @@ const updateHourlyView = (dayWeather) => {
     const weatherIcon = document.createElement('img');
     weatherIcon.src = getIconBasedOnWeather(data.weather[0].main);
     const tempLabel = document.createElement('h1');
-    tempLabel.textContent = Math.round(data.main.temp);
+    tempLabel.textContent = getTempInSelectedUnit(data.main.temp);
     const weatherDesc = document.createElement('h2');
     weatherDesc.textContent = data.weather[0].description;
 
@@ -117,9 +141,9 @@ const updateDailyView = (dailyWeather) => {
     );
 
     const weatherTemps = document.createElement('h1');
-    weatherTemps.textContent = `${Math.round(
+    weatherTemps.textContent = `${getTempInSelectedUnit(
       dailyWeather[day].tempMax
-    )} / ${Math.round(dailyWeather[day].tempMin)}`;
+    )} / ${getTempInSelectedUnit(dailyWeather[day].tempMin)}`;
 
     const weatherDesc = document.createElement('h2');
     // eslint-disable-next-line operator-linebreak
@@ -133,9 +157,70 @@ const updateDailyView = (dailyWeather) => {
   });
 };
 
+// Fetches from the WeatherData object to update all views
+const updateAllWeatherViews = () => {
+  const daysKeys = Object.keys(WeatherData.fiveDayWeather);
+
+  updateCurrentWeatherView(
+    WeatherData.countryCode,
+    WeatherData.cityName,
+    WeatherData.currentWeather
+  );
+  updateDailyView(WeatherData.fiveDayWeather);
+  updateHourlyView(WeatherData.fiveDayWeather[daysKeys[0]]);
+};
+
+const initializeEventListeners = () => {
+  const celsiusBtn = document.querySelector('#celsius');
+  const fahrenheitBtn = document.querySelector('#fahrenheit');
+  const tempBtns = [celsiusBtn, fahrenheitBtn];
+
+  tempBtns.forEach((btn) => {
+    btn.addEventListener('click', () => {
+      tempBtns.forEach((button) => button.classList.remove('selected'));
+      btn.classList.add('selected');
+      updateAllWeatherViews();
+    });
+  });
+
+  const searchbox = document.querySelector('input');
+  searchbox.addEventListener('keypress', async (key) => {
+    if (key.code === 'Enter') {
+      const loadingComponent = loadingView();
+      // Hide main container
+      const mainContainer = document.querySelector('main');
+      mainContainer.style.display = 'none';
+      try {
+        // Show loading component
+        document.body.appendChild(loadingComponent);
+        const coordinates = await searchLocation(searchbox.value);
+
+        // Begin API Request
+        // eslint-disable-next-line object-curly-newline
+        const { lat, lon, country, name } = coordinates[0];
+        WeatherData.countryCode = country;
+        WeatherData.cityName = name;
+
+        WeatherData.currentWeather = await getCurrentWeather(lat, lon);
+        const fiveDayWeather = await getFiveDayWeatherData(lat, lon);
+        WeatherData.fiveDayWeather = aggregateWeatherData(fiveDayWeather);
+
+        updateAllWeatherViews();
+      } catch (error) {
+        console.error(error);
+        alert(error);
+      }
+      // Show main container
+      mainContainer.style.display = 'block';
+      loadingComponent.remove();
+    }
+  });
+};
+
 export {
   updateCurrentWeatherView,
   updateDailyView,
   updateHourlyView,
   loadingView,
+  initializeEventListeners,
 };

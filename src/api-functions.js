@@ -21,7 +21,7 @@ const searchLocation = async (cityName) => {
 const getCurrentWeather = async (lat, lon) => {
   try {
     const response = await fetch(
-      `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&units=metric&appid=8230c0b0d2c568cf07b2de9c2d671edc`
+      `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=8230c0b0d2c568cf07b2de9c2d671edc`
     );
     const data = await response.json();
     return data;
@@ -36,7 +36,7 @@ const getCurrentWeather = async (lat, lon) => {
 const getFiveDayWeatherData = async (lat, lon) => {
   try {
     const response = await fetch(
-      `https://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&units=metric&appid=8230c0b0d2c568cf07b2de9c2d671edc`
+      `https://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&appid=8230c0b0d2c568cf07b2de9c2d671edc`
     );
     const data = await response.json();
     return data;
