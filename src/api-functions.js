@@ -2,10 +2,6 @@
 // https://api.openweathermap.org/data/2.5/weather?q=Dubai&APPID=8230c0b0d2c568cf07b2de9c2d671edc&units=metric
 
 import countries from './countries.json';
-import {
-  getCelsiusFromKelvin,
-  getFahrenheitFromKelvin,
-} from './units-converter';
 
 // Based on an input city name, return search results
 const searchLocation = async (cityName) => {
