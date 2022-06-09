@@ -7,6 +7,7 @@ import {
   getFiveDayWeatherData,
   aggregateWeatherData,
   getCurrentWeather,
+  convertCurrentWeather,
 } from './api-functions';
 
 import sampleWeather from './sample-data.json';
@@ -16,6 +17,8 @@ import {
   updateHourlyView,
   loadingView,
 } from './dom-ui';
+
+import sampleCurrentWeather from './sample-current-weather.json';
 
 const searchbox = document.querySelector('input');
 searchbox.addEventListener('keypress', async (key) => {
@@ -63,3 +66,4 @@ searchbox.addEventListener('keypress', async (key) => {
 // console.log(getFiveDayWeatherData(40.7127281, -74.0060152));
 // console.log(sampleWeather);
 console.log(aggregateWeatherData(sampleWeather));
+console.log(convertCurrentWeather(sampleCurrentWeather, 'F'));

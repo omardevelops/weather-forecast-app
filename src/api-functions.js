@@ -2,6 +2,10 @@
 // https://api.openweathermap.org/data/2.5/weather?q=Dubai&APPID=8230c0b0d2c568cf07b2de9c2d671edc&units=metric
 
 import countries from './countries.json';
+import {
+  getCelsiusFromKelvin,
+  getFahrenheitFromKelvin,
+} from './units-converter';
 
 // Based on an input city name, return search results
 const searchLocation = async (cityName) => {
@@ -21,7 +25,7 @@ const searchLocation = async (cityName) => {
 const getCurrentWeather = async (lat, lon) => {
   try {
     const response = await fetch(
-      `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&units=metric&appid=8230c0b0d2c568cf07b2de9c2d671edc`
+      `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=8230c0b0d2c568cf07b2de9c2d671edc`
     );
     const data = await response.json();
     return data;
@@ -36,7 +40,7 @@ const getCurrentWeather = async (lat, lon) => {
 const getFiveDayWeatherData = async (lat, lon) => {
   try {
     const response = await fetch(
-      `https://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&units=metric&appid=8230c0b0d2c568cf07b2de9c2d671edc`
+      `https://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&appid=8230c0b0d2c568cf07b2de9c2d671edc`
     );
     const data = await response.json();
     return data;
@@ -80,9 +84,43 @@ const aggregateWeatherData = (fullWeatherData) => {
   return aggregateDaily; // returns aggregated data with city info as well
 };
 
+// Unit conversion from Kelvin. Returns weather object with converted data.
+// Unit is either 'C' or 'F'
+const convertCurrentWeather = (weatherInKelvin, unit) => {
+  const finalWeather = weatherInKelvin;
+  const { temp } = weatherInKelvin.main;
+  const feelsLike = weatherInKelvin.main.feels_like;
+  const tempMin = weatherInKelvin.main.temp_min;
+  const tempMax = weatherInKelvin.main.temp_max;
+
+  if (unit === 'C') {
+    finalWeather.main.temp = getCelsiusFromKelvin(temp);
+    finalWeather.main.feels_like = getCelsiusFromKelvin(feelsLike);
+    finalWeather.main.temp_min = getCelsiusFromKelvin(tempMin);
+    finalWeather.main.temp_max = getCelsiusFromKelvin(tempMax);
+  } else {
+    // else unit is F
+    finalWeather.main.temp = getFahrenheitFromKelvin(temp);
+    finalWeather.main.feels_like = getFahrenheitFromKelvin(feelsLike);
+    finalWeather.main.temp_min = getFahrenheitFromKelvin(tempMin);
+    finalWeather.main.temp_max = getFahrenheitFromKelvin(tempMax);
+  }
+
+  return finalWeather;
+};
+
+// Unit conversion from Kelvin. Returns weather object with converted data.
+// Unit is either 'C' or 'F'
+const getFiveDayWeather = (weatherInKelvin, unit) => {
+  if (unit === 'C') {
+  } else {
+  }
+};
+
 export {
   searchLocation,
   getCurrentWeather,
   getFiveDayWeatherData,
   aggregateWeatherData,
+  convertCurrentWeather,
 };
