@@ -141,7 +141,7 @@ div.daily-hourly {
   gap: 25px;
 }
 div.daily-hourly > div {
-  width: 100px;
+  width: 110px;
   height: 160px;
   display: flex;
   flex-direction: column;
@@ -150,7 +150,7 @@ div.daily-hourly > div {
   background-color: rgba(0, 0, 0, 0.5);
   border: 2px solid transparent;
   border-radius: 15px;
-  padding: 25px 15px;
+  padding: 15px;
 }
 div.daily-hourly > div > img {
   width: 64px;

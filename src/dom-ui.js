@@ -21,9 +21,9 @@ import {
 const getTempInSelectedUnit = (temp) => {
   const celsiusBtn = document.querySelector('#celsius');
   if (celsiusBtn.classList.contains('selected')) {
-    return getCelsiusFromKelvin(temp);
+    return `${getCelsiusFromKelvin(temp)}°`;
   }
-  return getFahrenheitFromKelvin(temp);
+  return `${getFahrenheitFromKelvin(temp)}°`;
 };
 
 // Shows a spinning loading component
