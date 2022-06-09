@@ -84,43 +84,9 @@ const aggregateWeatherData = (fullWeatherData) => {
   return aggregateDaily; // returns aggregated data with city info as well
 };
 
-// Unit conversion from Kelvin. Returns weather object with converted data.
-// Unit is either 'C' or 'F'
-const convertCurrentWeather = (weatherInKelvin, unit) => {
-  const finalWeather = weatherInKelvin;
-  const { temp } = weatherInKelvin.main;
-  const feelsLike = weatherInKelvin.main.feels_like;
-  const tempMin = weatherInKelvin.main.temp_min;
-  const tempMax = weatherInKelvin.main.temp_max;
-
-  if (unit === 'C') {
-    finalWeather.main.temp = getCelsiusFromKelvin(temp);
-    finalWeather.main.feels_like = getCelsiusFromKelvin(feelsLike);
-    finalWeather.main.temp_min = getCelsiusFromKelvin(tempMin);
-    finalWeather.main.temp_max = getCelsiusFromKelvin(tempMax);
-  } else {
-    // else unit is F
-    finalWeather.main.temp = getFahrenheitFromKelvin(temp);
-    finalWeather.main.feels_like = getFahrenheitFromKelvin(feelsLike);
-    finalWeather.main.temp_min = getFahrenheitFromKelvin(tempMin);
-    finalWeather.main.temp_max = getFahrenheitFromKelvin(tempMax);
-  }
-
-  return finalWeather;
-};
-
-// Unit conversion from Kelvin. Returns weather object with converted data.
-// Unit is either 'C' or 'F'
-const getFiveDayWeather = (weatherInKelvin, unit) => {
-  if (unit === 'C') {
-  } else {
-  }
-};
-
 export {
   searchLocation,
   getCurrentWeather,
   getFiveDayWeatherData,
   aggregateWeatherData,
-  convertCurrentWeather,
 };
