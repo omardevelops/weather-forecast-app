@@ -50,22 +50,27 @@ const getFiveDayWeatherData = async (lat, lon) => {
 /* Example: {"2022-06-06": { "6:00": data1, "9:00": data2 }, "2022-06-07: {etc...}"...} */
 const aggregateWeatherData = (fullWeatherData) => {
   const aggregateDaily = {};
-  const { list, city } = fullWeatherData;
+  const { list } = fullWeatherData;
   list.forEach((item) => {
     const [date, time] = item.dt_txt.split(' ');
     if (aggregateDaily[date] === undefined) aggregateDaily[date] = {}; // if not avail, new entry
-    aggregateDaily[date][time] = item; // adds entire object
+    if (aggregateDaily[date].timings === undefined) {
+      aggregateDaily[date].timings = {};
+    }
+    aggregateDaily[date].timings[time] = item; // adds entire object
   });
+
+  console.log(aggregateDaily);
 
   // Find max temp and min temp for each day
   const dates = Object.keys(aggregateDaily);
   dates.forEach((date) => {
     let max = -999;
     let min = 999;
-    const times = Object.keys(aggregateDaily[date]);
+    const times = Object.keys(aggregateDaily[date].timings);
     times.forEach((time) => {
-      const tempMin = aggregateDaily[date][time].main.temp_min;
-      const tempMax = aggregateDaily[date][time].main.temp_max;
+      const tempMin = aggregateDaily[date].timings[time].main.temp_min;
+      const tempMax = aggregateDaily[date].timings[time].main.temp_max;
       if (tempMin < min) min = tempMin;
       if (tempMax > max) max = tempMax;
     });

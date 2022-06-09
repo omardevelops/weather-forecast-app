@@ -10,7 +10,11 @@ import {
 } from './api-functions';
 
 import sampleWeather from './sample-data.json';
-import { updateDailyView, updateCurrentWeatherView } from './dom-ui';
+import {
+  updateDailyView,
+  updateCurrentWeatherView,
+  updateHourlyView,
+} from './dom-ui';
 
 const searchbox = document.querySelector('input');
 searchbox.addEventListener('keypress', async (key) => {
@@ -22,12 +26,12 @@ searchbox.addEventListener('keypress', async (key) => {
       const currentWeather = await getCurrentWeather(lat, lon);
       const fiveDayWeather = await getFiveDayWeatherData(lat, lon);
       const aggregatedFiveDay = aggregateWeatherData(fiveDayWeather);
-      console.log(coordinates);
-      console.log(currentWeather);
-      console.log(aggregatedFiveDay);
 
+      const daysKeys = Object.keys(aggregatedFiveDay);
       updateCurrentWeatherView(country, name, currentWeather);
       updateDailyView(aggregatedFiveDay);
+      // Update hourly view by fetching first day data
+      updateHourlyView(aggregatedFiveDay[daysKeys[0]]);
     } catch (error) {
       console.error(error);
       alert(error);

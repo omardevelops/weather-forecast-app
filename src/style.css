@@ -32,9 +32,6 @@ main {
   user-select: none;
 }
 
-main > * {
-}
-
 #current-weather {
   display: flex;
   flex-direction: column;
@@ -98,7 +95,7 @@ h1 {
   text-align: center;
 }
 
-#daily-weather > div#daily-container {
+div.daily-hourly {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -106,7 +103,7 @@ h1 {
   margin-top: 20px;
   gap: 25px;
 }
-#daily-weather > div#daily-container > div {
+div.daily-hourly > div {
   width: 100px;
   height: 160px;
   display: flex;
@@ -115,12 +112,13 @@ h1 {
   gap: 5px;
   background-color: rgba(0, 0, 0, 0.5);
   border: 2px solid transparent;
-  padding: 15px 10px;
+  border-radius: 15px;
+  padding: 25px 15px;
 }
-#daily-weather > div#daily-container > div > img {
+div.daily-hourly > div > img {
   width: 64px;
 }
-#daily-weather > div#daily-container > div > h2 {
+div.daily-hourly > div > h2 {
   font-size: 1.2rem;
 }
 #daily-weather > div#daily-container > div:hover {
