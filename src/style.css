@@ -131,9 +131,11 @@ div.daily-hourly > div > h2 {
 /* Loading Image */
 
 .loading {
-  margin: 150px auto;
+  width: fit-content;
+  margin: 100px auto;
   display: flex;
   justify-content: center;
+  align-items: center;
 }
 .loading > img {
   width: 250px;
@@ -148,6 +150,10 @@ main {
   animation: fadeIn 0.5s;
 }
 
+#hourly-container > div {
+  animation: popInHourly 0.4s ease-out;
+}
+
 @keyframes fadeIn {
   0% {
     opacity: 0;
@@ -160,6 +166,16 @@ main {
 @keyframes popIn {
   0% {
     margin-top: 20px;
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+@keyframes popInHourly {
+  0% {
+    margin-top: 30px;
     opacity: 0;
   }
   100% {

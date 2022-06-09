@@ -53,6 +53,9 @@ const updateHourlyView = (dayWeather) => {
   // Remove existing content
   containerChilds.forEach((child) => child.remove());
 
+  // Display none for animation
+  container.style.display = 'none';
+
   const timings = Object.keys(dayWeather.timings);
   timings.forEach((timing) => {
     const data = dayWeather.timings[timing];
@@ -72,6 +75,9 @@ const updateHourlyView = (dayWeather) => {
     div.appendChild(weatherDesc);
     container.appendChild(div);
   });
+
+  // Restore view for animation to run
+  container.style.display = 'flex';
 };
 
 const selectDay = (dayDiv) => {
