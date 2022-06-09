@@ -17,12 +17,6 @@ import {
   loadingView,
 } from './dom-ui';
 
-function later(delay) {
-  return new Promise((resolve) => {
-    setTimeout(resolve, delay);
-  });
-}
-
 const searchbox = document.querySelector('input');
 searchbox.addEventListener('keypress', async (key) => {
   if (key.code === 'Enter') {
