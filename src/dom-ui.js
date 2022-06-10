@@ -220,10 +220,10 @@ const initialWeatherRequest = async () => {
   let location;
 
   const localGeoResult = localStorage.getItem('location');
-  if (localGeoResult !== undefined) {
+  if (localGeoResult) {
     location = localGeoResult; // Get result from local browser cache
   } else {
-    location = 'London, GB'; // Initial location is London UK
+    location = 'London'; // Initial location is London UK
   }
   const geoResult = await startGeoAPIRequest(location);
   await startWeatherAPIRequest(geoResult[0]); // Take first result, store in WeatherData
