@@ -11,12 +11,7 @@ import {
   getFahrenheitFromKelvin,
 } from './units-converter';
 
-import {
-  searchLocation,
-  getFiveDayWeatherData,
-  aggregateWeatherData,
-  getCurrentWeather,
-} from './api-functions';
+import { startGeoAPIRequest, startWeatherAPIRequest } from './api-functions';
 
 const getTempInSelectedUnit = (temp) => {
   const celsiusBtn = document.querySelector('#celsius');
@@ -170,6 +165,8 @@ const updateAllWeatherViews = () => {
   updateHourlyView(WeatherData.fiveDayWeather[daysKeys[0]]);
 };
 
+// Creates and adds the event listeners for the UI elements
+// Searchbox and temperature unit buttons (C and F)
 const initializeEventListeners = () => {
   const celsiusBtn = document.querySelector('#celsius');
   const fahrenheitBtn = document.querySelector('#fahrenheit');
@@ -193,17 +190,9 @@ const initializeEventListeners = () => {
       try {
         // Show loading component
         document.body.appendChild(loadingComponent);
-        const coordinates = await searchLocation(searchbox.value);
 
-        // Begin API Request
-        // eslint-disable-next-line object-curly-newline
-        const { lat, lon, country, name } = coordinates[0];
-        WeatherData.countryCode = country;
-        WeatherData.cityName = name;
-
-        WeatherData.currentWeather = await getCurrentWeather(lat, lon);
-        const fiveDayWeather = await getFiveDayWeatherData(lat, lon);
-        WeatherData.fiveDayWeather = aggregateWeatherData(fiveDayWeather);
+        const geoResult = await startGeoAPIRequest(searchbox.value);
+        await startWeatherAPIRequest(geoResult[0]); // Data stored in WeatherData object
 
         updateAllWeatherViews();
       } catch (error) {
