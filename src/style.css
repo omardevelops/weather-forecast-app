@@ -66,6 +66,7 @@ nav > div > button.selected::before {
 /* Main content of page (current weather, daily, and hourly) */
 main {
   margin-top: 120px;
+  display: hidden;
 }
 
 #current-weather {

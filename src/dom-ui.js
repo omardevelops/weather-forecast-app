@@ -194,6 +194,9 @@ const initializeEventListeners = () => {
         const geoResult = await startGeoAPIRequest(searchbox.value);
         await startWeatherAPIRequest(geoResult[0]); // Data stored in WeatherData object
 
+        // Update Local Storage to save most recently used location
+        localStorage.setItem('location', searchbox.value);
+
         updateAllWeatherViews();
       } catch (error) {
         console.error(error);
@@ -206,10 +209,36 @@ const initializeEventListeners = () => {
   });
 };
 
+const initialWeatherRequest = async () => {
+  const loadingComponent = loadingView();
+  // Hide main container
+  const mainContainer = document.querySelector('main');
+  mainContainer.style.display = 'none';
+  // Show loading component
+  document.body.appendChild(loadingComponent);
+
+  let location;
+
+  const localGeoResult = localStorage.getItem('location');
+  if (localGeoResult !== undefined) {
+    location = localGeoResult; // Get result from local browser cache
+  } else {
+    location = 'London, GB'; // Initial location is London UK
+  }
+  const geoResult = await startGeoAPIRequest(location);
+  await startWeatherAPIRequest(geoResult[0]); // Take first result, store in WeatherData
+
+  // Show main container
+  mainContainer.style.display = 'block';
+  loadingComponent.remove();
+  updateAllWeatherViews();
+};
+
 export {
   updateCurrentWeatherView,
   updateDailyView,
   updateHourlyView,
   loadingView,
   initializeEventListeners,
+  initialWeatherRequest,
 };
