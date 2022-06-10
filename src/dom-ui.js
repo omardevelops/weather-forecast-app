@@ -11,12 +11,7 @@ import {
   getFahrenheitFromKelvin,
 } from './units-converter';
 
-import {
-  searchLocation,
-  getFiveDayWeatherData,
-  aggregateWeatherData,
-  getCurrentWeather,
-} from './api-functions';
+import { startGeoAPIRequest, startWeatherAPIRequest } from './api-functions';
 
 const getTempInSelectedUnit = (temp) => {
   const celsiusBtn = document.querySelector('#celsius');
@@ -170,6 +165,8 @@ const updateAllWeatherViews = () => {
   updateHourlyView(WeatherData.fiveDayWeather[daysKeys[0]]);
 };
 
+// Creates and adds the event listeners for the UI elements
+// Searchbox and temperature unit buttons (C and F)
 const initializeEventListeners = () => {
   const celsiusBtn = document.querySelector('#celsius');
   const fahrenheitBtn = document.querySelector('#fahrenheit');
@@ -193,17 +190,12 @@ const initializeEventListeners = () => {
       try {
         // Show loading component
         document.body.appendChild(loadingComponent);
-        const coordinates = await searchLocation(searchbox.value);
 
-        // Begin API Request
-        // eslint-disable-next-line object-curly-newline
-        const { lat, lon, country, name } = coordinates[0];
-        WeatherData.countryCode = country;
-        WeatherData.cityName = name;
+        const geoResult = await startGeoAPIRequest(searchbox.value);
+        await startWeatherAPIRequest(geoResult[0]); // Data stored in WeatherData object
 
-        WeatherData.currentWeather = await getCurrentWeather(lat, lon);
-        const fiveDayWeather = await getFiveDayWeatherData(lat, lon);
-        WeatherData.fiveDayWeather = aggregateWeatherData(fiveDayWeather);
+        // Update Local Storage to save most recently used location
+        localStorage.setItem('location', searchbox.value);
 
         updateAllWeatherViews();
       } catch (error) {
@@ -217,10 +209,36 @@ const initializeEventListeners = () => {
   });
 };
 
+const initialWeatherRequest = async () => {
+  const loadingComponent = loadingView();
+  // Hide main container
+  const mainContainer = document.querySelector('main');
+  mainContainer.style.display = 'none';
+  // Show loading component
+  document.body.appendChild(loadingComponent);
+
+  let location;
+
+  const localGeoResult = localStorage.getItem('location');
+  if (localGeoResult !== undefined) {
+    location = localGeoResult; // Get result from local browser cache
+  } else {
+    location = 'London, GB'; // Initial location is London UK
+  }
+  const geoResult = await startGeoAPIRequest(location);
+  await startWeatherAPIRequest(geoResult[0]); // Take first result, store in WeatherData
+
+  // Show main container
+  mainContainer.style.display = 'block';
+  loadingComponent.remove();
+  updateAllWeatherViews();
+};
+
 export {
   updateCurrentWeatherView,
   updateDailyView,
   updateHourlyView,
   loadingView,
   initializeEventListeners,
+  initialWeatherRequest,
 };

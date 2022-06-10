@@ -1,10 +1,10 @@
 // This module is responsible for fetching data from OpenWeather's API
 // https://api.openweathermap.org/data/2.5/weather?q=Dubai&APPID=8230c0b0d2c568cf07b2de9c2d671edc&units=metric
 
-import countries from './countries.json';
+import WeatherData from './weather-data-save';
 
-// Based on an input city name, return search results
-const searchLocation = async (cityName) => {
+// Based on an input location name, return search results
+const startGeoAPIRequest = async (cityName) => {
   try {
     const response = await fetch(
       `https://api.openweathermap.org/geo/1.0/direct?q=${cityName}&limit=5&appid=8230c0b0d2c568cf07b2de9c2d671edc`
@@ -80,9 +80,17 @@ const aggregateWeatherData = (fullWeatherData) => {
   return aggregateDaily; // returns aggregated data with city info as well
 };
 
-export {
-  searchLocation,
-  getCurrentWeather,
-  getFiveDayWeatherData,
-  aggregateWeatherData,
+// Performs an API Request and fills in the WeatherData object
+const startWeatherAPIRequest = async (geoResult) => {
+  // Begin API Request
+  // eslint-disable-next-line object-curly-newline
+  const { lat, lon, country, name } = geoResult;
+  WeatherData.countryCode = country;
+  WeatherData.cityName = name;
+
+  WeatherData.currentWeather = await getCurrentWeather(lat, lon);
+  const fiveDayWeather = await getFiveDayWeatherData(lat, lon);
+  WeatherData.fiveDayWeather = aggregateWeatherData(fiveDayWeather);
 };
+
+export { startGeoAPIRequest, startWeatherAPIRequest };

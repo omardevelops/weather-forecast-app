@@ -3,6 +3,7 @@ import './reset.css';
 import './style.css';
 // ### Import JS Modules ###
 
-import { initializeEventListeners } from './dom-ui';
+import { initializeEventListeners, initialWeatherRequest } from './dom-ui';
 
 initializeEventListeners();
+initialWeatherRequest();
