@@ -1,8 +1,9 @@
+// ### Import CSS Files ###
 import './reset.css';
 import './style.css';
+// ### Import JS Modules ###
 
-import LocationSearch from './location-search';
+import { initializeEventListeners, initialWeatherRequest } from './dom-ui';
 
-const welcomeContainer = document.querySelector('#welcome');
-const locationSearchContainer = LocationSearch().createSearchboxElement();
-welcomeContainer.appendChild(locationSearchContainer);
+initializeEventListeners();
+initialWeatherRequest();

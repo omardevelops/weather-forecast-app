@@ -1,0 +1,72 @@
+[
+  {
+    "name": "New York",
+    "local_names": {
+      "el": "Νέα Υόρκη",
+      "de": "New York",
+      "uk": "Нью-Йорк",
+      "be": "Нью-Ёрк",
+      "pl": "Nowy Jork",
+      "fr": "New York",
+      "ta": "நியூ யோர்க்",
+      "kn": "ನ್ಯೂಯೊರ್ಕ್",
+      "cy": "Efrog Newydd",
+      "pt": "Nova Iorque",
+      "en": "New York",
+      "ca": "Nova York",
+      "gl": "Nova York",
+      "ru": "Нью-Йорк",
+      "he": "ניו יורק",
+      "is": "Nýja Jórvík",
+      "cs": "New York",
+      "vi": "New York",
+      "zh": "纽约",
+      "ar": "نيويورك",
+      "te": "న్యూయొర్క్",
+      "es": "Nueva York",
+      "oc": "Nòva York",
+      "it": "New York",
+      "fa": "نیویورک",
+      "ko": "뉴욕",
+      "eo": "Novjorko",
+      "ja": "ニューヨーク",
+      "mi": "Niu Iaka",
+      "hi": "न्यूयॊर्क्"
+    },
+    "lat": 40.7127281,
+    "lon": -74.0060152,
+    "country": "US",
+    "state": "New York"
+  },
+  {
+    "name": "New York",
+    "local_names": { "en": "New York", "ta": "நியூ யோர்க்" },
+    "lat": 55.0252998,
+    "lon": -1.4869496,
+    "country": "GB",
+    "state": "England"
+  },
+  {
+    "name": "New York",
+    "local_names": { "en": "New York", "ta": "நியூ யோர்க்" },
+    "lat": 39.6852874,
+    "lon": -93.9268836,
+    "country": "US",
+    "state": "Missouri"
+  },
+  {
+    "name": "New York",
+    "lat": 7.9631123,
+    "lon": -11.7636869,
+    "country": "SL",
+    "state": "Bo District"
+  },
+  {
+    "name": "New York",
+    "local_names": { "en": "New York", "ta": "நியூ யோர்க்" },
+    "lat": 32.1679321,
+    "lon": -95.6691277,
+    "country": "US",
+    "state": "Texas"
+  }
+]

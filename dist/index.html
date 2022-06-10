@@ -9,13 +9,53 @@
 </head>
 
 <body>
-  <main>
-    <div id="welcome" class="dialog-box">
-      <h1 class="header">Welcome to Weather-Forecast-App</h1>
+  <nav>
+    <input type="text" placeholder="Search">
+    <div>
+      <button class="selected" id="celsius">Celsius</button>
+      <button id="fahrenheit">Fahrenheit</button>
     </div>
-    <!-- <div id="weather-info" class="dialog-box">
+  </nav>
+  <main>
+    <div id="current-weather">
       <h1>Dubai, United Arab Emirates</h1>
-    </div> -->
+      <div id="temperature-container">
+        <img src="clear-day-cropped.svg" alt="a">
+        <h1>45°C</h1>
+      </div>
+      <h2 id="weather-description">Clear</h2>
+      <div id="details">
+
+      </div>
+    </div>
+    <div id="daily-weather">
+      <h1>Daily</h1>
+      <div id="daily-container" class="daily-hourly">
+        <div class="selected">
+          <h2>Tue, Jun 7</h2>
+          <img src="./clear-day-cropped.svg" alt="weee">
+          <h2>42°C</h2>
+          <h3>Scattered clouds</h3>
+        </div>
+        <div>test</div>
+        <div>test</div>
+        <div>test</div>
+        <div>test</div>
+      </div>
+    </div>
+    <div id="hourly-weather">
+      <h1>Hourly</h1>
+      <div id="hourly-container" class="daily-hourly">
+        <div>
+          <h2>00:00</h2>
+          <img src="./clear-day-cropped.svg" alt="weee">
+          <h2>42°C</h2>
+          <h3>Scattered clouds</h3>
+        </div>
+        <div></div>
+        <div></div>
+      </div>
+    </div>
   </main>
 </body>
 <script src="main.js"></script>
