@@ -199,8 +199,9 @@ const initializeEventListeners = () => {
 
         updateAllWeatherViews();
       } catch (error) {
-        console.error(error);
-        alert(error);
+        alert(
+          'There was an error in your request. Please try again with a different search query.'
+        );
       }
       // Show main container
       mainContainer.style.display = 'block';

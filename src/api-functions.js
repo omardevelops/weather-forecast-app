@@ -60,8 +60,6 @@ const aggregateWeatherData = (fullWeatherData) => {
     aggregateDaily[date].timings[time] = item; // adds entire object
   });
 
-  console.log(aggregateDaily);
-
   // Find max temp and min temp for each day
   const dates = Object.keys(aggregateDaily);
   dates.forEach((date) => {
